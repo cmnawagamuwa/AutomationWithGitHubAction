@@ -22,7 +22,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Test
-      run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
+      run: dotnet test --logger "trx;LogFileName=test-results.trx"
 
     - name: Test Report
       uses: dorny/test-reporter@v1
