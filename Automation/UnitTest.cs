@@ -15,7 +15,7 @@ namespace Automation
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("headless");
             Driver = new ChromeDriver(chromeOptions);
-
+            //New comment added
 
         }
 
