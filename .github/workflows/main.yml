@@ -1,11 +1,10 @@
-name: .NET Core
-
+name: Deploy
 on:
-  repository_dispatch
+  repository_dispatch:
 
 jobs:
   build:
-
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
