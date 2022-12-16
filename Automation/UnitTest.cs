@@ -23,7 +23,7 @@ namespace Automation
         public void Test1()
         {
             Driver.Navigate().GoToUrl("https://live-102914.watiapp.io/login");
-            Assert.AreEqual("WATI - WhatsApp Team Inbox1", Driver.Title);
+            Assert.AreEqual("WATI - WhatsApp Team Inbox", Driver.Title);
         }
     }
 }
