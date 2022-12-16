@@ -1,8 +1,7 @@
 name: .NET Core
 
 on:
-  pull_request:
-  workflow_dispatch:
+  repository_dispatch
 
 jobs:
   build:
@@ -17,9 +16,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-
-    - name: Build
-      run: dotnet build --configuration Release
 
     - name: Test
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
