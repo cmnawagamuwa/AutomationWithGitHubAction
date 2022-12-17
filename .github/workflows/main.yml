@@ -2,11 +2,10 @@ name: main
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-      
-
+    inputs:
+      comment_url:
+        required: true
+        type: string
 jobs:
   build:
 
