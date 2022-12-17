@@ -1,6 +1,6 @@
 name: Deploy
 on:
-  repository_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,3 +27,22 @@ jobs:
         path: "**/test-results.trx"                            
         reporter: dotnet-trx
         fail-on-error: true
+  
+    - name: Set commit status
+      if: ${{ github.event.inputs.commit }}
+      uses: cmnawagamuwa/TestMainRepo@master
+      with:
+          # create personal GitHub token to be able to
+          # set status in other repositories
+          # https://github.com/settings/tokens/new
+        authToken: ${{secrets.PAT_TOKEN}
+        context: 'Regression tests'
+        description: 'Cypress ran the tests'
+          # state can be success, error, failure, or pending
+          # let's grab it from the Cypress step outcomes
+          # https://github.com/cypress-io/github-action#outputs
+        state: "test"
+        owner: 'cmnawagamuwa'
+        repository: 'TestMainRepo'
+        sha: ${{github.event.inputs.commit}}
+        target_url: "abc"
