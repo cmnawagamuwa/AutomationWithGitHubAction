@@ -1,7 +1,8 @@
 name: .NET Core
 
 on:
-  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -29,11 +30,5 @@ jobs:
       with:
         name: DotNET Tests
         path: "**/test-results.trx"                            
-        reporter: dotnet-trx
-        
-        if: failure()
-          echo "Job failed custome message"
-        then:
-          echo "Job success custom message"          
-        
+        reporter: dotnet-trx     
         fail-on-error: true
