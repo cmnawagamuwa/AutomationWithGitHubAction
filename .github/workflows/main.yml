@@ -1,11 +1,12 @@
 name: main
 
 on:
-  workflow_dispatch:
-    inputs:
-      comment_url:
-        required: true
-        type: string
+  push:
+  #workflow_dispatch:
+    #inputs:
+      #comment_url:
+        #required: true
+        #type: string
 jobs:
   build:
 
@@ -34,3 +35,7 @@ jobs:
         path: "**/test-results.trx"                            
         reporter: dotnet-trx     
         fail-on-error: true
+        
+        
+    - name: Echo check run ids
+      run: echo "job ids - ${{ toJSON(fromJSON(steps.fetch.outputs.data).jobs.*.id) }}        
