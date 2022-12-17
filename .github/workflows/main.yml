@@ -31,11 +31,7 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: DotNET Tests
+        name: Regression Test Report
         path: "**/test-results.trx"                            
         reporter: dotnet-trx     
-        fail-on-error: true
-        
-        
-    - name: Echo check run ids
-      run: echo "job ids - ${{ toJSON(fromJSON(steps.fetch.outputs.data).jobs.*.id) }}        
+        fail-on-error: true       
