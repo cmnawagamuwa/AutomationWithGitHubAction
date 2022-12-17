@@ -1,10 +1,11 @@
-name: Deploy
+name: .NET Core
+
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Test
+
     runs-on: ubuntu-latest
 
     steps:
@@ -16,6 +17,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: Build
+      run: dotnet build --configuration Release
+
     - name: Test
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
 
@@ -26,23 +30,10 @@ jobs:
         name: DotNET Tests
         path: "**/test-results.trx"                            
         reporter: dotnet-trx
+        
+        if: failure()
+          echo "Job failed custome message"
+        then:
+          echo "Job success custom message"          
+        
         fail-on-error: true
-  
-    - name: Set commit status
-      if: ${{ github.event.inputs.commit }}
-      uses: cmnawagamuwa/TestMainRepo@master
-      with:
-          # create personal GitHub token to be able to
-          # set status in other repositories
-          # https://github.com/settings/tokens/new
-        authToken: ${{secrets.PAT_TOKEN}
-        context: 'Regression tests'
-        description: 'Cypress ran the tests'
-          # state can be success, error, failure, or pending
-          # let's grab it from the Cypress step outcomes
-          # https://github.com/cypress-io/github-action#outputs
-        state: "test"
-        owner: 'cmnawagamuwa'
-        repository: 'TestMainRepo'
-        sha: ${{github.event.inputs.commit}}
-        target_url: "abc"
