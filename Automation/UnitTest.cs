@@ -19,6 +19,9 @@ namespace Automation
 
         }
 
+        /// <summary>
+        /// First Test method
+        /// </summary>
         [Test]
         public void Test1()
         {
