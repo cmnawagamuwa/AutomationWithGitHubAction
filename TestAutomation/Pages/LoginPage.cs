@@ -2,16 +2,10 @@
 using OpenQA.Selenium.Support.UI;
 
 
-namespace TestAutomation.Pages
+namespace TestAutomation
 {
-    internal class LoginPage
-    {
-        public LoginPage(IWebDriver webDriver)
-        {
-            Driver = webDriver;
-        }
-
-        private IWebDriver Driver { get; }
+    internal class LoginPage : WebDriver
+    {        
 
         public IWebElement TxtEmail => Driver.FindElement(By.Name("email"));
 
@@ -22,6 +16,16 @@ namespace TestAutomation.Pages
         public bool IsBtnLoginExist => BtnLogin.Displayed;
 
         public void ClickLogin() => BtnLogin.Click();
+
+        public void NavigateToLoginPage()
+        {
+            Driver.Navigate().GoToUrl("https://wati-demo15.clare.ai/login");            
+        }
+
+        public void IsThisLoginPage()
+        {
+            Assert.That(Driver.Title, Is.EqualTo("WATI - WhatsApp Team Inbox"));
+        }
 
         public void Login(string email, string password)
         {
