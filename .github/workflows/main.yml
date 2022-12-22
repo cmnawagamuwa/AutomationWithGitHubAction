@@ -7,6 +7,9 @@ on:
       #comment_url:
         #required: true
         #type: string
+env:
+  envURL: wati-demo15.clare.ai
+  
 jobs:
   build:
 
