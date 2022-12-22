@@ -24,7 +24,7 @@ namespace TestAutomation
 
         public void NavigateToLoginPage()
         {
-            webDriver.Driver.Navigate().GoToUrl($"https://{webDriver.TestingUrl}/login");
+            webDriver.Driver.Navigate().GoToUrl($"{webDriver.URL}/login");
             WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//button[text()='Login']")));
         }

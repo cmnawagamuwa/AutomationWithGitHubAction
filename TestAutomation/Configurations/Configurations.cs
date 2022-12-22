@@ -9,7 +9,9 @@ namespace TestAutomation
 
         public string Password { get; set; }
 
-        public string TestingUrl { get; set; }
+        public string URL { get; set; }
+
+        string GitHubUser { get; set; }
 
         public Configurations()
 		{
@@ -19,11 +21,11 @@ namespace TestAutomation
 
 		void LoadSeetings(JObject settings)
 		{
-            Username = settings["UserCredentials"]?["Username"]?.ToString() ?? string.Empty;
-            Password = settings["UserCredentials"]?["Password"]?.ToString() ?? string.Empty;
-            //wati-demo15.clare.ai
-            TestingUrl = Environment.GetEnvironmentVariable("envURL");
+            GitHubUser = Environment.GetEnvironmentVariable("username");
+
+            URL = settings[GitHubUser]?["url"]?.ToString() ?? string.Empty;
+            Username = settings[GitHubUser]?["Username"]?.ToString() ?? string.Empty;
+            Password = settings[GitHubUser]?["Password"]?.ToString() ?? string.Empty;            
         }
 	}
 }
-
