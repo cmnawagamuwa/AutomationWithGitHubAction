@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Print currnet user
+      run: echo "${{github.actor}}"    
+        
     - name: Checkout  
       uses: actions/checkout@v1
 
