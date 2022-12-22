@@ -13,8 +13,9 @@ namespace TestAutomation
 		{
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("headless");
-            chromeOptions.AddArguments("--start-maximized");
+            chromeOptions.AddArguments("window-size=1920,1080");
             Driver = new ChromeDriver(chromeOptions);
+          
         }
 	}
 }

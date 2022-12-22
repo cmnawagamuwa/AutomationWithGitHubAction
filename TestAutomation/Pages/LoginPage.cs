@@ -4,14 +4,19 @@ using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomation
 {
-    internal class LoginPage : WebDriver
-    {        
+    internal class LoginPage 
+    {
+        readonly WebDriver webDriver;
+        public LoginPage(WebDriver webDriver)
+        {
+            this.webDriver = webDriver;
+        }
 
-        public IWebElement TxtEmail => Driver.FindElement(By.Name("email"));
+        public IWebElement TxtEmail => webDriver.Driver.FindElement(By.Name("email"));
 
-        public IWebElement TxtPassword => Driver.FindElement(By.Name("password"));
+        public IWebElement TxtPassword => webDriver.Driver.FindElement(By.Name("password"));
 
-        public IWebElement BtnLogin => Driver.FindElement(By.XPath("//button[text()='Login']"));
+        public IWebElement BtnLogin => webDriver.Driver.FindElement(By.XPath("//button[text()='Login']"));
 
         public bool IsBtnLoginExist => BtnLogin.Displayed;
 
@@ -19,12 +24,14 @@ namespace TestAutomation
 
         public void NavigateToLoginPage()
         {
-            Driver.Navigate().GoToUrl("https://wati-demo15.clare.ai/login");            
+            webDriver.Driver.Navigate().GoToUrl("https://wati-demo15.clare.ai/login");
+            WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//button[text()='Login']")));
         }
 
         public void IsThisLoginPage()
         {
-            Assert.That(Driver.Title, Is.EqualTo("WATI - WhatsApp Team Inbox"));
+            Assert.That(webDriver.Driver.Title, Is.EqualTo("WATI - WhatsApp Team Inbox"));
         }
 
         public void Login(string email, string password)
@@ -33,7 +40,7 @@ namespace TestAutomation
             TxtPassword.SendKeys(password);
             ClickLogin();
 
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+            WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-testid='teamInbox-leftSide-actionBar-newMessage-button']")));
         }
     }

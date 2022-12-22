@@ -1,1 +1,1 @@
-New regression test automation project need be here
+New regression test automation project need be here..

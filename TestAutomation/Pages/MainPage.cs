@@ -3,41 +3,61 @@ using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomation
 {
-    internal class MainPage : WebDriver
-    { 
-        public IWebElement ProfileAvatarButton => Driver.FindElement(By.CssSelector("[aria-label='account of current user']"));
+    internal class MainPage 
+    {
+        readonly WebDriver webDriver;
+        public MainPage(WebDriver webDriver)
+        {
+            this.webDriver = webDriver;
+        }
 
-        public IWebElement SignoutBtn => Driver.FindElement(By.CssSelector("[data-testid='profileMenu-firstGroup-signOut-button']"));
+        public IWebElement ProfileAvatarButton => webDriver.Driver.FindElement(By.CssSelector("[aria-label='account of current user']"));
 
-        public IWebElement SignoutConfirmedBtn => Driver.FindElement(By.CssSelector("[data-testid='modals-confirmDialog-content-buttons-negative-button']"));
+        public IWebElement SignoutBtn => webDriver.Driver.FindElement(By.CssSelector("[data-testid='profileMenu-firstGroup-signOut-button']"));
+
+        public IWebElement SignoutConfirmedBtn => webDriver.Driver.FindElement(By.CssSelector("[data-testid='modals-confirmDialog-content-buttons-negative-button']"));
 
         public void VerifyLogin()
         {
-
-            Task.Delay(3000).Wait();
-            var messageButton = Driver.FindElement(By.XPath("//span[normalize-space()='New Message']"));
-            Assert.That(messageButton, Is.True);
+            var messageButton = webDriver.Driver.FindElement(By.CssSelector("[data-testid='teamInbox-leftSide-actionBar-newMessage-button']"));
+            Assert.That(messageButton.Displayed, Is.True);
+            Task.Delay(1000).Wait();
         }       
 
 
-        public void checkContacts()
+        public void CheckContacts()
         {
-            var ContactsTab = Driver.FindElement(By.LinkText("Contacts"));
-            Assert.That(ContactsTab.Displayed, Is.True);
+            var ContactsTab = webDriver.Driver.FindElement(By.CssSelector("[data-testid='headerNavBar-menuNavItem-contacts-link']"));
+            ContactsTab.Click();
+            WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-testid='contacts-header-addContact-button']")));
+            var addContactBtn = webDriver.Driver.FindElement(By.CssSelector("[data-testid='contacts-header-addContact-button']"));
+            Assert.That(addContactBtn.Displayed, Is.True);
+            Task.Delay(1000).Wait();
         }
 
        
-        public void ClickBroadcast()
+        public void CheckBroadcast()
         {     
-            var BroadcastTab = Driver.FindElement(By.LinkText("Broadcast"));
-            Assert.That(BroadcastTab.Displayed, Is.True);
+            var BroadcastTab = webDriver.Driver.FindElement(By.CssSelector("[data-testid='headerNavBar-menuNavItem-broadcast-link']"));
+            BroadcastTab.Click();
+            WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-testid='broadCastHistory-statusBar-newBroadCast-button']")));
+            var newBroadcastBtn = webDriver.Driver.FindElement(By.CssSelector("[data-testid='broadCastHistory-statusBar-newBroadCast-button']"));
+            Assert.That(newBroadcastBtn.Displayed, Is.True);
+            Task.Delay(1000).Wait();
 
         }
 
         public void CheckAutomation()
         {           
-            var AutomationTab = Driver.FindElement(By.LinkText("Automation"));
-            Assert.That(AutomationTab.Displayed, Is.True);
+            var AutomationTab = webDriver.Driver.FindElement(By.CssSelector("[data-testid='headerNavBar-menuNavItem-automation-link']"));
+            AutomationTab.Click();
+            WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-testid='defaultAction-workingHoursPane-setWorkingHours-button']")));
+            var setWorkingHoursBtn = webDriver.Driver.FindElement(By.CssSelector("[data-testid='defaultAction-workingHoursPane-setWorkingHours-button']"));
+            Assert.That(setWorkingHoursBtn.Displayed, Is.True);
+            Task.Delay(1000).Wait();
         }
 
         public void SignOut()
