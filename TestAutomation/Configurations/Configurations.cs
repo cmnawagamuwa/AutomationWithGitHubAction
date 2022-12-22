@@ -7,9 +7,11 @@ namespace TestAutomation
 	{
 		public string Username { get; set; }
 
-		public string Password { get; set; }
+        public string Password { get; set; }
 
-		public Configurations()
+        public string TestingUrl { get; set; }
+
+        public Configurations()
 		{
             var settings = JObject.Parse(File.ReadAllText("appsettings.json"));
 			LoadSeetings(settings);
@@ -19,6 +21,8 @@ namespace TestAutomation
 		{
             Username = settings["UserCredentials"]?["Username"]?.ToString() ?? string.Empty;
             Password = settings["UserCredentials"]?["Password"]?.ToString() ?? string.Empty;
+            //wati-demo15.clare.ai
+            TestingUrl = Environment.GetEnvironmentVariable("envURL");
         }
 	}
 }
