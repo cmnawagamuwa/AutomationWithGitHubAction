@@ -7,12 +7,15 @@ on:
       #comment_url:
         #required: true
         #type: string
+env:
+  username: "${{github.actor}}"
+  
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    steps:
+    steps: 
     - name: Checkout  
       uses: actions/checkout@v1
 
