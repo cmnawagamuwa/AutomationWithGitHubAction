@@ -18,7 +18,7 @@ jobs:
     steps: 
     
     - name: test curl
-      run: curl -i https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/build?token=remote_build
+      run: curl -i https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/build?token=remote_build&BUILD_BRANCH=WATI-5600-regression-test-automation-using-Selenium    
       
     - name: Checkout  
       uses: actions/checkout@v1
