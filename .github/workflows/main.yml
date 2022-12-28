@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
+    
+    - name: test curl
+      run: curl -i https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/build?token=remote_build
+      
     - name: Checkout  
       uses: actions/checkout@v1
 
