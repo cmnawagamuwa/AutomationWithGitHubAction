@@ -3,10 +3,10 @@ name: main
 on:
   #push:
   workflow_dispatch:
-    #inputs:
-      #comment_url:
-        #required: true
-        #type: string
+    inputs:
+      branch_name:
+        required: true
+        type: string
 env:
   username: "${{github.actor}}"
   
