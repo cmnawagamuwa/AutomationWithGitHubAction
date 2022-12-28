@@ -18,7 +18,7 @@ jobs:
     steps: 
     
     - name: test curl
-      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=WATI-5600-regression-test-automation-using-Selenium    
+      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
       run: echo "${{ github.event.inputs.branch_name }}"
       
     - name: Checkout  
